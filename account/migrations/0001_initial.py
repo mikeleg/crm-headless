@@ -8,35 +8,54 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Account',
+            name="Account",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('name', models.CharField(max_length=100)),
-                ('legalname', models.CharField(max_length=100)),
-                ('vat', models.CharField(max_length=20)),
-                ('address', models.CharField(max_length=200)),
-                ('city', models.CharField(max_length=50)),
-                ('zipcode', models.CharField(max_length=32)),
-                ('country', models.CharField(max_length=50)),
-                ('province', models.CharField(max_length=50)),
-                ('geo', models.CharField(max_length=20)),
-                ('phone', models.CharField(max_length=100)),
-                ('email', models.CharField(max_length=200)),
-                ('pec', models.CharField(max_length=200)),
-                ('sdi', models.CharField(max_length=20)),
-                ('type', models.CharField(choices=[('INACTIVE', 'Inactive'), ('CUSTOMER', 'Customer'), ('PROSPECT', 'Prospect'), ('COMPETITOR', 'Competitor')], max_length=10)),
-                ('update_date', models.DateTimeField(auto_now=True)),
-                ('create_date', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("legalname", models.CharField(max_length=100)),
+                ("vat", models.CharField(max_length=20)),
+                ("address", models.CharField(max_length=200)),
+                ("city", models.CharField(max_length=50)),
+                ("zipcode", models.CharField(max_length=32)),
+                ("country", models.CharField(max_length=50)),
+                ("province", models.CharField(max_length=50)),
+                ("geo", models.CharField(max_length=20)),
+                ("phone", models.CharField(max_length=100)),
+                ("email", models.CharField(max_length=200)),
+                ("pec", models.CharField(max_length=200)),
+                ("sdi", models.CharField(max_length=20)),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[
+                            ("INACTIVE", "Inactive"),
+                            ("CUSTOMER", "Customer"),
+                            ("PROSPECT", "Prospect"),
+                            ("COMPETITOR", "Competitor"),
+                        ],
+                        max_length=10,
+                    ),
+                ),
+                ("update_date", models.DateTimeField(auto_now=True)),
+                ("create_date", models.DateTimeField(auto_now_add=True)),
             ],
             options={
-                'verbose_name': 'account',
-                'verbose_name_plural': 'accounts',
-                'db_table': 'account',
+                "verbose_name": "account",
+                "verbose_name_plural": "accounts",
+                "db_table": "account",
             },
         ),
     ]

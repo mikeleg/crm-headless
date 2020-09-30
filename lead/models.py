@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from core import fields
 
 
 class Lead(models.Model):
