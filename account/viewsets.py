@@ -4,12 +4,12 @@ from .models import Account
 from .serializers import AccountSerializer
 
 
-class AccountList(mixins.ListModelMixin, viewsets.GenericViewSet):
+class AccountCreateList(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
+
 class AccountDetail(
-    mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
     mixins.DestroyModelMixin,
