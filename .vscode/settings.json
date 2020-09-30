@@ -1,3 +1,5 @@
 {
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "python.pythonPath": "c:\\@\\Progetti\\mikeleg\\.envs\\.crmlessenv\\Scripts\\python.exe",
+    "python.linting.pylintEnabled": true
 }
