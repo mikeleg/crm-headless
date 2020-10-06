@@ -1,13 +1,27 @@
 from django.urls import include, path
 from rest_framework import routers
 from account import viewsets
+from contact import viewsets as contact_views
 
-router = routers.DefaultRouter()
-router.register(r"account", viewsets.AccountDetail, "account-detail")
+
+router = routers.DefaultRouter(trailing_slash=False)
+router.register(r"accounts", viewsets.AccountDetail, "account-detail")
 router.register(r"accounts", viewsets.AccountCreateList, "account-list")
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path("", include(router.urls)),
+    path("api/", include(router.urls)),
+    path(
+        "api/accounts/<int:account_id>/contacts",
+        contact_views.ContactCreateList.as_view({"get": "list", "post": "create"}),
+        name="account-contact-list",
+    ),
+    path(
+        "api/accounts/<int:account_id>/contact/<int:pk>",
+        contact_views.ContactDetail.as_view(
+            {"get": "retrieve", "put": "update", "patch": "partial_update", "delete": "destroy"}
+        ),
+        name="account-contact-detail",
+    ),
 ]

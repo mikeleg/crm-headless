@@ -5,8 +5,6 @@ from core import fields
 
 class Account(models.Model):
 
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False, unique=True)
-
     name = models.CharField(max_length=100)
     legalname = models.CharField(max_length=100)
     vat = models.CharField(max_length=20)
@@ -16,12 +14,12 @@ class Account(models.Model):
     zipcode = models.CharField(max_length=32)
     country = models.CharField(max_length=50)
     province = models.CharField(max_length=50)
-    geo = models.CharField(max_length=20)
+    geo = models.CharField(max_length=20, blank=True)
 
     phone = models.CharField(max_length=100)
     email = models.CharField(max_length=200)
-    pec = models.CharField(max_length=200)
-    sdi = models.CharField(max_length=20)
+    pec = models.CharField(max_length=200, blank=True)
+    sdi = models.CharField(max_length=20, blank=True)
 
     type = models.CharField(max_length=10, choices=fields.CUSTOMER_TYPE)
 

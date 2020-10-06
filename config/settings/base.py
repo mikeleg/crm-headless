@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "account",
     "lead",
+    "contact",
 ]
 
 MIDDLEWARE = [
@@ -27,7 +28,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "crmless.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -45,7 +46,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "crmless.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Password validation
