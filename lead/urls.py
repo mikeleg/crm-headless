@@ -14,13 +14,14 @@ urlpatterns = [
     path(
         "api/leads/<int:lead_id>/contacts",
         contact_viewsets.ContactCreateList.as_view({"get": "list", "post": "create"}),
-        name="lead-contact-list",
+        name="account-contact-list",
     ),
     path(
-        "api/leads/<int:lead_id>/contact/<int:contact_id>",
+        "api/leads/<int:lead_id>/contact/<int:pk>",
         contact_viewsets.ContactDetail.as_view(
             {"get": "retrieve", "put": "update", "patch": "partial_update", "delete": "destroy"}
         ),
-        name="lead-contact-detail",
+        name="account-contact-detail",
     ),
+    
 ]
