@@ -10,6 +10,8 @@ class Contact(models.Model):
     jobTitle = models.CharField(max_length=100, blank=True)
     lead_id = models.IntegerField(null=True)
     account_id = models.IntegerField(null=True)
+    update_date = models.DateTimeField(auto_now=True)
+    create_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "contact"

@@ -3,11 +3,10 @@ from .models import Contact
 
 
 class ContactSerializer(serializers.ModelSerializer):
-    
     def validate(self, data):
         if data["laed_id"] > 0 and data["account_id"] > 0:
             raise serializers.ValidationError("contact isn't in account and lead simultaneously")
-        
+
         if len(data["phone"]) == 0 and len(data["email"]) == 0:
             raise serializers.ValidationError("phone or email are mandatory")
         return data
