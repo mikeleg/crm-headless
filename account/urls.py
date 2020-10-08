@@ -25,12 +25,12 @@ urlpatterns = [
         name="account-contact-detail",
     ),
     path(
-        "api/accounts/<int:lead_id>/notes",
+        "api/accounts/<int:account_id>/notes",
         note_viewsets.NoteCreateList.as_view({"get": "list", "post": "create"}),
         name="account-note-list",
     ),
     path(
-        "api/accounts/<int:lead_id>/notes/<int:pk>",
+        "api/accounts/<int:account_id>/notes/<int:pk>",
         note_viewsets.NoteDetail.as_view(
             {"get": "retrieve", "put": "update", "delete": "destroy"}
         ),
