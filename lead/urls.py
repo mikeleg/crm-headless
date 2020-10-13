@@ -14,18 +14,6 @@ router.register(r"leads", viewsets.LeadCreateList, "lead-list")
 urlpatterns = [
     path("api/", include(router.urls)),
     path(
-        "api/leads/<int:lead_id>/contacts",
-        contact_viewsets.ContactCreateList.as_view({"get": "list", "post": "create"}),
-        name="lead-contact-list",
-    ),
-    path(
-        "api/leads/<int:lead_id>/contacts/<int:pk>",
-        contact_viewsets.ContactDetail.as_view(
-            {"get": "retrieve", "put": "update", "patch": "partial_update", "delete": "destroy"}
-        ),
-        name="lead-contact-detail",
-    ),
-    path(
         "api/leads/<int:lead_id>/notes",
         note_viewsets.NoteCreateList.as_view({"get": "list", "post": "create"}),
         name="lead-note-list",

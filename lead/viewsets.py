@@ -22,6 +22,6 @@ class LeadDetail(
     queryset = Lead.objects.all()
     serializer_class = LeadSerializer
 
-    @action(detail=True, methods=["POST"],name="Convert lead into account")
+    @action(detail=True, methods=["POST"], name="Convert lead into account")
     def convert_to_account(self, request, pk=None):
-        pass #put method in a queue
+        pass  # put method in a queue

@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     "account",
     "lead",
     "contact",
+    "note",
 ]
 
 MIDDLEWARE = [
