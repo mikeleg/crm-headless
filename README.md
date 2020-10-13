@@ -16,9 +16,3 @@
     python manage.py migrate
     python manage.py runserver
     ```
-
-<p>
-    <a href="https://www.buymeacoffee.com/mikeleg">
-        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-green.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 60px !important;" >
-    </a>
-</p>
