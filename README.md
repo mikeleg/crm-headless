@@ -1,4 +1,4 @@
-<h3 align="center">Crm Headless api service in django.</h3>
+# Crm Headless api service in django.
 
 **crm-headless** provides a clean **REST** based API with endpoints for manipulating the account, lead, note, contact.
 
