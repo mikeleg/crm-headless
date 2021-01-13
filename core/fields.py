@@ -3,4 +3,5 @@ CUSTOMER_TYPE = (
     ("CUSTOMER", "Customer"),
     ("PROSPECT", "Prospect"),
     ("COMPETITOR", "Competitor"),
+    ("LEAD", "Lead"),
 )

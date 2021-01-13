@@ -1,5 +1,6 @@
-from rest_framework import mixins, viewsets
-
+from django.http import response
+from rest_framework import mixins, viewsets, status
+from rest_framework.response import Response
 from .models import Contact
 from .serializers import ContactSerializer
 
@@ -7,24 +8,19 @@ from .serializers import ContactSerializer
 class ContactCreateList(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = ContactSerializer
 
-    def get_serializer_context(self):
-        ctx = super().get_serializer_context()
-
-        ctx.update(
-            {"account_id": self.kwargs.get("account_id"), "lead_id": self.kwargs.get("lead_id")}
-        )
-
-        return ctx
-
     def get_queryset(self, *args, **kwargs):
-        queryset = Contact.objects.all()
+        queryset = None
 
         if self.kwargs.get("account_id") is not None:
-            queryset = queryset.filter(account_id__exact=self.kwargs.get("account_id"))
-        elif self.kwargs.get("lead_id") is not None:
-            queryset = queryset.filter(lead_id__exact=self.kwargs.get("lead_id"))
-
+            queryset = Contact.objects.filter(account_id__exact=self.kwargs.get("account_id"))
+        else:
+            return Response("Non è selezionato un'account ", status=status.HTTP_404_NOT_FOUND)
         return queryset
+
+    def perform_create(self, serializer):
+        if self.kwargs.get("account_id") is None:
+            return Response("Non è selezionato un'account ", status=status.HTTP_404_NOT_FOUND)
+        serializer.save(account_id=self.kwargs.get("account_id"))
 
 
 class ContactDetail(
@@ -35,3 +31,12 @@ class ContactDetail(
 ):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = None
+
+        if self.kwargs.get("account_id") is not None:
+            queryset = Contact.objects.filter(account_id__exact=self.kwargs.get("account_id"))
+        else:
+            return Response("Non è selezionato un'account ", status=status.HTTP_404_NOT_FOUND)
+        return queryset

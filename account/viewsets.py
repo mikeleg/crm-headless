@@ -17,3 +17,7 @@ class AccountDetail(
 ):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
+
+    def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)

@@ -1,4 +1,5 @@
 from django.db import models
+from account.models import Account
 
 
 class Contact(models.Model):
@@ -8,8 +9,8 @@ class Contact(models.Model):
     phone = models.CharField(max_length=100, blank=True)
     default = models.BooleanField(default=False)
     jobTitle = models.CharField(max_length=100, blank=True)
-    lead_id = models.IntegerField(null=True)
-    account_id = models.IntegerField(null=True)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="contacts")
+
     update_date = models.DateTimeField(auto_now=True)
     create_date = models.DateTimeField(auto_now_add=True)
 
@@ -17,3 +18,6 @@ class Contact(models.Model):
         verbose_name = "contact"
         verbose_name_plural = "contacts"
         db_table = "contact"
+
+    def __str__(self) -> str:
+        return f"{self.surname} {self.name}"

@@ -1,10 +1,10 @@
 from django.db import models
+from account.models import Account
 
 
 class Note(models.Model):
     description = models.TextField()
-    lead_id = models.IntegerField(null=True)
-    account_id = models.IntegerField(null=True)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="notes")
     update_date = models.DateTimeField(auto_now=True)
     create_date = models.DateTimeField(auto_now_add=True)
 
