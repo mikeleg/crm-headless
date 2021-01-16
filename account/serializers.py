@@ -1,9 +1,12 @@
 from rest_framework import serializers
+from rest_framework import validators
+from rest_framework.validators import UniqueValidator
+
 from .models import Account
 
 
 class AccountSerializer(serializers.ModelSerializer):
-
+    
     def validate_legalname(self, value):
         if not value:
             raise serializers.ValidationError("Legalname empty or missing")
@@ -12,6 +15,10 @@ class AccountSerializer(serializers.ModelSerializer):
     def validate_vat(self, value):
         if not value:
             raise serializers.ValidationError("Vat empty or missing")
+
+        if Account.objects.filter(vat=value).count() > 0:
+            raise serializers.ValidationError("Vat already exist")
+
         return value
 
     def validate_address(self, value):
@@ -46,7 +53,7 @@ class AccountSerializer(serializers.ModelSerializer):
 
     def validate_email(self, value):
         if not value:
-            raise serializers.ValidationError("Blog post is not about Django")
+            raise serializers.ValidationError("Email empty or missing")
         return value
 
     def validate_type(self, value):

@@ -19,5 +19,5 @@ class AccountDetail(
     serializer_class = AccountSerializer
 
     def update(self, request, *args, **kwargs):
-        kwargs['partial'] = True
+        kwargs["partial"] = True
         return super().update(request, *args, **kwargs)

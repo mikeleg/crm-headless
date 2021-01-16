@@ -15,7 +15,7 @@ class AccountFactory(factory.django.DjangoModelFactory):
 
     name = factory.Sequence(lambda n: "Name {}".format(n))
     legalname = factory.Sequence(lambda n: "Legalname {}".format(n))
-    vat = factory.Sequence(lambda n: "Vat {}".format(n))
+    vat = factory.Sequence(lambda n: str(n).zfill(11))
     address = factory.Sequence(lambda n: "address {}".format(n))
     city = factory.Sequence(lambda n: "city {}".format(n))
     zipcode = factory.Sequence(lambda n: "zipcode {}".format(n))
