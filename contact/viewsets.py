@@ -40,3 +40,7 @@ class ContactDetail(
         else:
             return Response("Non è selezionato un'account ", status=status.HTTP_404_NOT_FOUND)
         return queryset
+
+    def update(self, request, *args, **kwargs):
+        kwargs["partial"] = True
+        return super().update(request, *args, **kwargs)
