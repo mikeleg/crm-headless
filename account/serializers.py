@@ -1,12 +1,13 @@
-from rest_framework import serializers
-from rest_framework import validators
+from contact.serializers import ContactSerializer
+from core import fields
+from note.serializers import NoteSerializer
+from rest_framework import serializers, validators
 from rest_framework.validators import UniqueValidator
 
 from .models import Account
 
 
 class AccountSerializer(serializers.ModelSerializer):
-    
     def validate_legalname(self, value):
         if not value:
             raise serializers.ValidationError("Legalname empty or missing")
@@ -61,6 +62,33 @@ class AccountSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Customer Type empty or missing")
         return value
 
+    account_type = serializers.ChoiceField(
+        choices=fields.CUSTOMER_TYPE, source="type", read_only=True
+    )
+    contacts = ContactSerializer(many=True, source="contact_set", read_only=True)
+    notes = NoteSerializer(many=True, source="note_set", read_only=True)
+
     class Meta:
         model = Account
-        fields = "__all__"
+        fields = [
+            "id",
+            "name",
+            "legalname",
+            "vat",
+            "address",
+            "city",
+            "zipcode",
+            "country",
+            "province",
+            "geo",
+            "phone",
+            "email",
+            "pec",
+            "sdi",
+            "account_type",
+            "update_date",
+            "create_date",
+            "contacts",
+            "notes",
+        ]
+        read_only_fields =["id"]

@@ -12,7 +12,6 @@ Mock Contact
 """
 
 
-
 class ContactFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Contact

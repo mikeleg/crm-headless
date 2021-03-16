@@ -12,15 +12,13 @@ class ContactCreateList(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets
         queryset = None
 
         if self.kwargs.get("account_id") is not None:
-            queryset = Contact.objects.filter(account_id__exact=self.kwargs.get("account_id"))
+            queryset = Contact.objects.filter(account_id=self.kwargs.get("account_id"))
         else:
             return Response("Non è selezionato un'account ", status=status.HTTP_404_NOT_FOUND)
         return queryset
 
-    def perform_create(self, serializer):
-        if self.kwargs.get("account_id") is None:
-            return Response("Non è selezionato un'account ", status=status.HTTP_404_NOT_FOUND)
-        serializer.save(account_id=self.kwargs.get("account_id"))
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
 
 
 class ContactDetail(

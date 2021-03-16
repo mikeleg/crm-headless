@@ -7,19 +7,17 @@ from .factory import ContactFactory
 
 
 class ContactTest(APITestCase):
-    
     def setUp(self) -> None:
         self.contact = ContactFactory.create_batch(5)
 
-
     def test_contact_list(self):
-        url = '/api/account/1/contact'
+        url = "/api/account/1/contact"
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
 
     def test_create_contact_OK(self):
-        url = '/api/account/1/contact'
+        url = "/api/account/1/contact"
         payload = {
             "name": "Mikele",
             "surname": "Gatti",

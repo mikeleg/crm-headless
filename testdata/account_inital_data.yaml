@@ -1,0 +1,38 @@
+- model: account.Account
+  pk: 1
+  fields:
+    name: test
+    legalname: test legalname name
+    vat: 0000000001
+    address: via test n°10
+    city: Fidenza
+    zipcode: 43036
+    country: Italy
+    province: PR
+    geo: 21314jdnkn
+    phone: 32323234242
+    email: test@test.com
+    pec: test@test.com
+    sdi: 12345
+    type: 1
+    update_date: 2013-03-16T17:41:28+00:00
+    create_date: 2013-03-16T17:41:28+00:00
+- model: account.Account
+  pk: 2
+  fields:
+    name: test2
+    legalname: test2 legalname name
+    vat: 0000000002
+    address: via test2 n°10
+    city: Fidenza2
+    zipcode: 43036
+    country: Italy2
+    province: PR2
+    geo: 21314jdnkn2
+    phone: 32323234242
+    email: test@test.com
+    pec: test@test.com
+    sdi: 12345
+    type: 1
+    update_date: 2013-03-16T17:41:28+00:00
+    create_date: 2013-03-16T17:41:28+00:00

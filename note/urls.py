@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
-from .viewsets import NoteCreateList,NoteDetail
+from .viewsets import NoteCreateList, NoteDetail
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r"note", NoteCreateList, "note")

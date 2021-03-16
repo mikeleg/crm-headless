@@ -9,7 +9,7 @@ class Contact(models.Model):
     phone = models.CharField(max_length=100, blank=True)
     default = models.BooleanField(default=False)
     jobTitle = models.CharField(max_length=100, blank=True)
-    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="contacts")
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     update_date = models.DateTimeField(auto_now=True)
     create_date = models.DateTimeField(auto_now_add=True)

@@ -1,7 +1,9 @@
-import core.utils as core_utils
+import os
 from pathlib import Path
 
+import core.utils as core_utils
 
+PROJECT_DIR = os.path.abspath(os.path.dirname(__name__))
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +46,10 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
+
 
 WSGI_APPLICATION = "config.wsgi.application"
 
