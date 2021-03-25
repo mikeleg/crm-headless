@@ -15,6 +15,13 @@ class NoteCreateList(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
         else:
             return Response("Non è selezionato un'account ", status=status.HTTP_404_NOT_FOUND)
         return queryset
+    
+    def create(self, request, *args, **kwargs):
+        if self.kwargs.get("account_id") is None:
+            return Response("Non è selezionato un'account ", status=status.HTTP_404_NOT_FOUND)
+        request.data['account'] = self.kwargs.get("account_id")
+               
+        return super().create(request)
 
 
 class NoteDetail(

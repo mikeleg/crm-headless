@@ -1,7 +1,7 @@
 from django.http import response
 from rest_framework import mixins, viewsets, status
 from rest_framework.response import Response
-from .models import Contact
+from .models import Contact,Account
 from .serializers import ContactSerializer
 
 
@@ -18,7 +18,13 @@ class ContactCreateList(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets
         return queryset
 
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+        if self.kwargs.get("account_id") is None:
+            return Response("Non è selezionato un'account ", status=status.HTTP_404_NOT_FOUND)
+        request.data['account'] = self.kwargs.get("account_id")
+               
+        return super().create(request)   
+
+
 
 
 class ContactDetail(
