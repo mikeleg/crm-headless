@@ -1,5 +1,5 @@
 from typing import Optional, List, Protocol
-from ..models.concat import Contact
+from ..models.contact import Contact
 from core.models.contact import Contact as ContactEntity
 
 

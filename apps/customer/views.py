@@ -16,9 +16,7 @@ class CustomerView(CrmApiView):
         self.service = CustomerService(CustomerRepository())
         super().__init__(**kwargs)
 
-    @extend_schema(
-        responses=CustomerResponse, tags=["customer"], description="Get all customers"
-    )
+    @extend_schema(responses=CustomerResponse, tags=["customer"], description="Get all customers")
     def list(self, request):
         customers = self.service.all()
         return Response(CustomerResponse(customers, many=True).data)

@@ -23,9 +23,7 @@ urlpatterns += [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/docs/",
-        SpectacularSwaggerView.as_view(
-            template_name="swagger-ui.html", url_name="schema"
-        ),
+        SpectacularSwaggerView.as_view(template_name="swagger-ui.html", url_name="schema"),
         name="swagger-ui",
     ),
 ]

@@ -14,16 +14,12 @@ class ContactView(CrmApiView):
         self.service = ContactService(ContactRepository())
         super().__init__(**kwargs)
 
-    @extend_schema(
-        responses=ContactResponse, tags=["contact"], description="Get all contacts"
-    )
+    @extend_schema(responses=ContactResponse, tags=["contact"], description="Get all contacts")
     def list(self, request):
         contacts = self.service.all()
         return Response(ContactResponse(contacts, many=True).data)
 
-    @extend_schema(
-        responses=ContactResponse, tags=["contact"], description="Get contact by id"
-    )
+    @extend_schema(responses=ContactResponse, tags=["contact"], description="Get contact by id")
     def retrieve(self, request, pk: int):
         contact = self.service.get(id)
         return Response(ContactResponse(contact).data)
