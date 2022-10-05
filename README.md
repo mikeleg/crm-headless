@@ -1,6 +1,6 @@
 # Crm Headless api service in django.
 
-**crm-headless** provides a clean **REST** based API with endpoints for manipulating the account, note, contact,activity.
+**crm-headless** provides a clean **REST** based API with endpoints for manipulating the customer, note, contact, activity.
 
 ## Features
 
