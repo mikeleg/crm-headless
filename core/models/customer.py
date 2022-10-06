@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
-from datetime import datetime
 from typing import Optional
 
 from core.enums import CUSTOMER_TYPE

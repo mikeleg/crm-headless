@@ -4,7 +4,7 @@ from core.enums import CUSTOMER_TYPE
 
 class Customer(models.Model):
 
-    nickname = models.CharField(max_length=200, blank=True)
+    nickname = models.CharField(max_length=200, null=True)
     legalname = models.CharField(max_length=200)
     vat = models.CharField(max_length=20)
     address = models.CharField(max_length=200)

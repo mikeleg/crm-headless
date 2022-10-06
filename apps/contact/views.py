@@ -1,11 +1,13 @@
 from typing import Any
+
 from apps.contact.dto import ContactResponse, UpsertContactRequest
 from apps.contact.service import ContactService
 from core.api import CrmApiView
-from drf_spectacular.utils import extend_schema
-from rest_framework.response import Response
 from core.models.contact import Contact
+from drf_spectacular.openapi import OpenApiTypes
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from infrastructure.repositories.contact import ContactRepository
+from rest_framework.response import Response
 
 
 @extend_schema()
@@ -19,7 +21,12 @@ class ContactView(CrmApiView):
         contacts = self.service.all()
         return Response(ContactResponse(contacts, many=True).data)
 
-    @extend_schema(responses=ContactResponse, tags=["contact"], description="Get contact by id")
+    @extend_schema(
+        responses=ContactResponse,
+        parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
+        tags=["contact"],
+        description="Get contact by id",
+    )
     def retrieve(self, request, pk: int):
         contact = self.service.get(id)
         return Response(ContactResponse(contact).data)
@@ -27,6 +34,7 @@ class ContactView(CrmApiView):
     @extend_schema(
         request=UpsertContactRequest,
         responses=ContactResponse,
+        parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
         tags=["contact"],
         description="Create a new contact",
     )
@@ -44,6 +52,7 @@ class ContactView(CrmApiView):
     @extend_schema(
         request=UpsertContactRequest,
         responses=ContactResponse,
+        parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
         tags=["contact"],
         description="Update a contact",
     )
@@ -59,7 +68,11 @@ class ContactView(CrmApiView):
 
         return Response(ContactResponse(contact).data)
 
-    @extend_schema(responses=Any, tags=["contact"], description="Delete a contact")
+    @extend_schema(
+        parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
+        tags=["contact"],
+        description="Delete a contact",
+    )
     def destroy(self, request, pk: int):
 
         self.service.delete(pk)

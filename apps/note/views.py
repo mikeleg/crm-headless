@@ -1,13 +1,13 @@
-import re
 from typing import Any
-from rest_framework.response import Response
+
 from apps.note.dto import NoteResponse, UpsertNoteRequest
 from apps.note.service import NoteService
 from core.api import CrmApiView
-from drf_spectacular.utils import extend_schema
 from core.models.note import Note
-
+from drf_spectacular.openapi import OpenApiTypes
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from infrastructure.repositories.note import NoteRepository
+from rest_framework.response import Response
 
 
 @extend_schema()
@@ -21,7 +21,12 @@ class NoteView(CrmApiView):
         notes = self.service.all()
         return Response(NoteResponse(notes, many=True).data)
 
-    @extend_schema(responses=NoteResponse, tags=["note"], description="Get note by id")
+    @extend_schema(
+        responses=NoteResponse,
+        parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
+        tags=["note"],
+        description="Get note by id",
+    )
     def retrieve(self, request, pk: int):
         note = self.service.get(pk)
         return Response(NoteResponse(note, many=True).data)
@@ -46,6 +51,7 @@ class NoteView(CrmApiView):
     @extend_schema(
         request=UpsertNoteRequest,
         responses=NoteResponse,
+        parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
         tags=["note"],
         description="Update note",
     )
@@ -61,7 +67,12 @@ class NoteView(CrmApiView):
 
         return Response(NoteResponse(updated_note).data)
 
-    @extend_schema(responses=Any, tags=["note"], description="Delete note")
+    @extend_schema(
+        responses=Any,
+        parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
+        tags=["note"],
+        description="Delete note",
+    )
     def destroy(self, request: Any, pk: int):
 
         self.service.delete(pk)

@@ -49,6 +49,7 @@ class ContactRepository:
     def _convert_instance(instance: Contact) -> ContactEntity:
         return ContactEntity(
             id=instance.id,
+            nickname=instance.nickname,
             customer_id=instance.customer_id,
             name=instance.name,
             phone=instance.phone,

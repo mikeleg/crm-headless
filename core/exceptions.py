@@ -1,0 +1,2 @@
+class AddressIsDoubleAssigned(Exception):
+    pass

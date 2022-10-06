@@ -3,12 +3,13 @@ from typing import Optional
 
 
 @dataclass
-class Contact:
+class Address:
     id: Optional[int]
     nickname: Optional[str]
-    name: str
-    surname: str
-    email: str
-    phone: str
-    job_title: str
+    street: str
+    number: int
+    city: str
+    zip_code: str
+    country: str
     customer_id: Optional[int]
+    contact_id: Optional[int]
