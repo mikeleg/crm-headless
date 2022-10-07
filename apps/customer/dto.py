@@ -54,4 +54,4 @@ class UpsertCustomerRequest(serializers.Serializer):
     email = serializers.CharField(allow_blank=True)
     pec = serializers.CharField(allow_blank=True)
     sdi = serializers.CharField(allow_blank=True)
-    type = serializers.ChoiceField(choices=CUSTOMER_TYPE.choices, read_only=True)
+    type = serializers.ChoiceField(choices=CUSTOMER_TYPE.choices)
