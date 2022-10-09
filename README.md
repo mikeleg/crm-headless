@@ -10,7 +10,14 @@
 
 1. **Development enviroment**:
    ```
-   pip install -R requirements.txt
+   pip install -R requirements/dev.txts
+   python manage.py makemigrations
+   python manage.py migrate
+   python manage.py runserver
+   ```
+1. **Production enviroment**:
+   ```
+   pip install -R requirements/dev.txts
    python manage.py makemigrations
    python manage.py migrate
    python manage.py runserver
