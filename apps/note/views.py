@@ -61,8 +61,8 @@ class NoteView(CrmApiView):
         if not note_dto.is_valid():
             return Response(note_dto.errors, status=400)
 
-        note_dto.id = pk
         node_domain = Note(**note_dto.data)
+        node_domain.id = pk
         updated_note = self.service.update(node_domain)
 
         return Response(NoteResponse(updated_note).data)

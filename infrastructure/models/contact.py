@@ -7,9 +7,9 @@ class Contact(models.Model):
     nickname = models.CharField(max_length=50, null=True)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
-    email = models.EmailField(blank=True)
-    phone = models.CharField(max_length=100, blank=True)
-    jobTitle = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=100, blank=True, null=True)
+    job_title = models.CharField(max_length=100, blank=True, null=True)
     customer = models.ForeignKey(
         Customer, on_delete=models.DO_NOTHING, related_name="contacts", null=True
     )

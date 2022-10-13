@@ -11,10 +11,10 @@ class Address(models.Model):
     zip_code = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     customer = models.ForeignKey(
-        "Customer", on_delete=models.DO_NOTHING, related_name="addresses"
+        "Customer", on_delete=models.DO_NOTHING, related_name="addresses", null=True
     )
     contact = models.ForeignKey(
-        "Contact", on_delete=models.DO_NOTHING, related_name="addresses"
+        "Contact", on_delete=models.DO_NOTHING, related_name="addresses", null=True
     )
     type = models.CharField(max_length=20, choices=ADDRESS_TYPE.choices, null=True)
 

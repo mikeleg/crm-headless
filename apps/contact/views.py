@@ -34,7 +34,7 @@ class ContactView(CrmApiView):
     @extend_schema(
         request=UpsertContactRequest,
         responses=ContactResponse,
-        parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
+        parameters=[],
         tags=["contact"],
         description="Create a new contact",
     )
@@ -52,7 +52,7 @@ class ContactView(CrmApiView):
     @extend_schema(
         request=UpsertContactRequest,
         responses=ContactResponse,
-        parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
+        parameters=[],
         tags=["contact"],
         description="Update a contact",
     )
@@ -62,8 +62,8 @@ class ContactView(CrmApiView):
         if not contact_dto.is_valid():
             return Response(contact_dto.errors, status=400)
 
-        contact_dto.id = pk
         contact_domain = Contact(**contact_dto.data)
+        contact_domain.id = pk
         contact = self.service.update(contact_domain)
 
         return Response(ContactResponse(contact).data)

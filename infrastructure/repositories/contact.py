@@ -55,5 +55,5 @@ class ContactRepository:
             phone=instance.phone,
             surname=instance.surname,
             email=instance.email,
-            job_title=instance.jobTitle,
+            job_title=instance.job_title,
         )

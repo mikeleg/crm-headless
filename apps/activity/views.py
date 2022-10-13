@@ -54,7 +54,8 @@ class ActivityView(CrmApiView):
             return Response(activity_dto.errors, status=400)
 
         activity_domain = activity.Activity(**activity_dto.data)
-        updated_activity = self.service.update(pk, activity_domain)
+        activity_domain.id = pk
+        updated_activity = self.service.update(activity_domain)
 
         return Response(ActivityResponse(updated_activity).data)
 
