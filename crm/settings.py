@@ -115,12 +115,17 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-SPECTACULAR_DEFAULTS: Dict[str, Any] = {
+SPECTACULAR_SETTINGS: Dict[str, Any] = {
     "TITLE": "Cmr Headless API",
     "DESCRIPTION": "This is a headless API for the CRM project",
     "VERSION": "0.0.1",
+    "TAGS": ["customer", "note", "contact", "activity", "address"],
+    "POSTPROCESSING_HOOKS": ["drf_spectacular.hooks.postprocess_schema_enums"],
     "SWAGGER_UI_DIST": "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest",
     "SWAGGER_UI_FAVICON_HREF": "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/favicon-32x32.png",
-    "TAGS": ["customer", "note", "contact", "activity"],
-    "POSTPROCESSING_HOOKS": ["drf_spectacular.hooks.postprocess_schema_enums"],
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "persistAuthorization": True,
+    },
+    "SERVE_INCLUDE_SCHEMA": False,
 }

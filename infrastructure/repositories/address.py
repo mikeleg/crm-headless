@@ -1,15 +1,17 @@
 from typing import Optional, List, Protocol
 
-from core.exceptions import AddressIsDoubleAssigned
+from core.exceptions import AddressIsDoubleAssigned, AddressWithoutParentKey
 from ..models.address import Address
 from core.models.address import Address as AddressEntity
 
 
 class IAddressRepository(Protocol):
-    def all(self) -> List[AddressEntity]:
+    def all(self, customer_id: int = None, contact_id: int = None) -> List[AddressEntity]:
         pass
 
-    def get(self, id: int) -> Optional[AddressEntity]:
+    def get(
+        self, id: int, customer_id: int = None, contact_id: int = None
+    ) -> Optional[AddressEntity]:
         pass
 
     def create(self, note: AddressEntity) -> AddressEntity:
@@ -23,21 +25,36 @@ class IAddressRepository(Protocol):
 
 
 class AddressRepository:
-    def all(self) -> List[AddressEntity]:
-        return [self._convert_instance(address) for address in Address.objects.all()]
+    def all(self, customer_id: int = None, contact_id: int = None) -> List[AddressEntity]:
+        addresses = None
 
-    def get(self, id: int) -> Optional[AddressEntity]:
-        if id is None:
+        if customer_id is not None:
+            addresses = Address.objects.filter(customer_id=customer_id)
+        elif contact_id is not None:
+            addresses = Address.objects.filter(contact_id=contact_id)
+
+        if addresses is None:
+            return []
+
+        return [self._convert_instance(address) for address in addresses]
+
+    def get(
+        self, id: int, customer_id: int = None, contact_id: int = None
+    ) -> Optional[AddressEntity]:
+
+        address = None
+
+        if customer_id is not None:
+            address = Address.objects.filter(customer_id=customer_id).filter(id=id).first()
+        elif contact_id is not None:
+            address = Address.objects.filter(contact_id=contact_id).filter(id=id).first()
+
+        if address is None:
             return None
 
-        return self._convert_instance(Address.objects.filter(id=id).first())
+        return self._convert_instance(address)
 
     def create(self, address: AddressEntity) -> AddressEntity:
-
-        if address.customer_id is not None and address.contact_id is not None:
-            raise AddressIsDoubleAssigned(
-                "Address can't be associated with both customer and contact"
-            )
 
         new_address = Address.objects.create(**address.__dict__)
         new_address.save()
@@ -45,11 +62,6 @@ class AddressRepository:
         return self._convert_instance(new_address)
 
     def update(self, address: AddressEntity) -> AddressEntity:
-
-        if address.customer_id is not None and address.contact_id is not None:
-            raise AddressIsDoubleAssigned(
-                "Address can't be associated with both customer and contact"
-            )
 
         address.objects.filter(id=address.id).update(**address.__dict__)
         address_updated = Address.objects.filter(id=address.id).first()
@@ -71,4 +83,5 @@ class AddressRepository:
             number=instance.number,
             customer_id=instance.customer_id,
             contact_id=instance.contact_id,
+            type=instance.type,
         )

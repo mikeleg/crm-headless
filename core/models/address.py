@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional
 
+from core.enums import ADDRESS_TYPE
+
 
 @dataclass
 class Address:
@@ -13,3 +15,4 @@ class Address:
     country: str
     customer_id: Optional[int]
     contact_id: Optional[int]
+    type: Optional["ADDRESS_TYPE"]
