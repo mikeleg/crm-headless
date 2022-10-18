@@ -1,6 +1,8 @@
 from pathlib import Path
 from typing import Any, Dict
 
+from core.enums import ADDRESS_TYPE, CUSTOMER_TYPE
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -128,4 +130,8 @@ SPECTACULAR_SETTINGS: Dict[str, Any] = {
         "persistAuthorization": True,
     },
     "SERVE_INCLUDE_SCHEMA": False,
+    "ENUM_NAME_OVERRIDES": {
+        "CustomerType": ["customer", "prospect", "lead"],
+        "AddressType": ["billing", "shipping", "other"],
+    },
 }
