@@ -20,7 +20,7 @@ This project is built on top of **Django** and **Django Rest Framework** and in 
    ```
 1. **Production enviroment**:
    ```
-   pip install -R requirements/prod.txt
+   pip install -R requirements/productions.txt
    python manage.py makemigrations
    python manage.py migrate
    python manage.py runserver
